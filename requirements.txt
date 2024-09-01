@@ -1,0 +1,7 @@
+flask
+exifread
+folium
+pillow
+bottleneck
+pandas
+numexpr
