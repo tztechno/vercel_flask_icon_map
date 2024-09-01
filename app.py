@@ -10,11 +10,13 @@ import tempfile
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
+
 def download_image(url):
     response = requests.get(url)
     if response.status_code == 200:
         return io.BytesIO(response.content)
     return None
+
 
 def get_gps_coordinates(image_data):
     exif_data = exifread.process_file(image_data)
@@ -30,6 +32,7 @@ def get_gps_coordinates(image_data):
     print("GPS coordinates not found in EXIF data")
     return None, None
 
+
 def convert_to_degrees(value, ref):
     d = float(value[0].num) / float(value[0].den)
     m = float(value[1].num) / float(value[1].den)
@@ -38,6 +41,7 @@ def convert_to_degrees(value, ref):
     if ref in ['S', 'W']:
         decimal = -decimal
     return decimal
+
 
 def create_map_with_photos(photo_urls):
     coordinates = []
@@ -93,9 +97,11 @@ def create_map_with_photos(photo_urls):
         f.write(map_html)
     print(f"Map created with {len(coordinates)} markers")
 
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html', map_created=False)
+
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
@@ -110,6 +116,7 @@ def process_image():
     except Exception as e:
         return jsonify({'error': str(e), 'map_created': False}), 500
 
+
 @app.route('/map')
 def show_map():
     map_path = 'static/map_data.html'
@@ -121,9 +128,11 @@ def show_map():
         flash("Map not created yet. Please process images first.")
         return render_template('map.html', map_exists=False)
 
+
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
+
 
 if __name__ == '__main__':
     os.makedirs('static', exist_ok=True)
