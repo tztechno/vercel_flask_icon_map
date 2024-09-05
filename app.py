@@ -81,7 +81,7 @@ def create_map_with_photos(photo_urls):
 
         img = Image.open(temp_file_path)
         img.thumbnail((100, 100))
-        thumbnail_path = os.path.join('static', f'thumbnail_{i}.jpg')
+        thumbnail_path = os.path.join(f'thumbnail_{i}.jpg')
         img.save(thumbnail_path)
 
         os.unlink(temp_file_path)  # 一時ファイルを削除
