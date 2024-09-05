@@ -12,7 +12,7 @@ git init
 git remote add origin https://github.com/tztechno/vercel_flask_icon_map.git
 
 git add .
-git commit -m "2024-09-01"
+git commit -m "2024-09-05"
 git push -u origin master
 
 
@@ -22,3 +22,4 @@ python app.py
 http://127.0.0.1:5000
 
 http://127.0.0.1:5000
+

@@ -88,7 +88,7 @@ def create_map_with_photos(photo_urls):
 
         folium.Marker(
             location=[lat, lon],
-            popup=folium.Popup(f'<img src="/static/thumbnail_{i}.jpg" width="100" height="100">', max_width=200),
+            popup=folium.Popup(f'<a href="{photo_url}" target="_blank"><img src="{thumbnail_path}" width="100" height="100"></a>'),
             icon=folium.Icon(icon="camera")
         ).add_to(map)
 
